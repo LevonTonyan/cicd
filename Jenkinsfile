@@ -1,16 +1,12 @@
 pipeline {
     agent any 
     stages {
-          stage('Checkout SCM') { 
+       
+          stage('Tool install') { 
             steps {
-                  git "https://github.com/LevonTonyan"
+                sh 'npm install'
             }
         }
-       //    stage('Tool install') { 
-       //      steps {
-       //          sh 'npm install'
-       //      }
-       //  }
        //  stage('Build') { 
        //      steps {
        //          sh 'npm build'
