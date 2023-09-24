@@ -4,6 +4,7 @@ pipeline {
        
           stage('Tool install') { 
             steps {
+                sh 'apt install npm'
                 sh 'npm install'
             }
         }
