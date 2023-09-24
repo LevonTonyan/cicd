@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     tools {nodejs "node"
-          'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'}
+            docker 'docker'}
     stages {
        
           stage('NPM install') { 
