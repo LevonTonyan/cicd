@@ -21,14 +21,26 @@ pipeline {
        stage('Docker build') { 
             steps {
                 script {
-                    sh 'docker build -t nodedev:v1.0 .' 
-                }
-                
+                    def currentBranch = env.BRANCH_NAME
+                    if (currentBranch == 'main') {
+                        sh 'docker build -t nodemain:v1.0 .' 
+                    }else if (currentBranch == 'dev') {
+                        sh 'docker build -t nodedev:v1.0 .' 
+                    }   
+                }        
             }
         }
+
         stage('Deploy') { 
             steps {
-                sh 'docker run -d --expose 3001 -p 3001:3000 nodedev:v1.0' 
+                script {
+                      def currentBranch = env.BRANCH_NAME
+                     if (currentBranch == 'main') {
+                         sh 'docker run -d --expose 3000 -p 3000:3000 nodemain:v1.0' 
+                    }else if (currentBranch == 'dev') {
+                         sh 'docker run -d --expose 3001 -p 3001:3000 nodedev:v1.0' 
+                    }   
+                }      
             }
         }
     }
