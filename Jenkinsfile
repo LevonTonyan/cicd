@@ -1,12 +1,9 @@
 pipeline {
     agent any 
+    tools {nodejs "node"}
     stages {
-          stage('Checkout SCM') { 
-            steps {
-                  git "https://github.com/LevonTonyan"
-            }
-        }
-          stage('Tool install') { 
+       
+          stage('NPM install') { 
             steps {
                 sh 'npm install'
             }
@@ -23,7 +20,10 @@ pipeline {
         }
        stage('Docker build') { 
             steps {
-                sh 'docker build -t nodedev:v1.0.' 
+                script {
+                    sh 'docker build -t nodedev:v1.0 .' 
+                }
+                
             }
         }
         stage('Deploy') { 
