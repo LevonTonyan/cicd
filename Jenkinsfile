@@ -21,7 +21,7 @@ pipeline {
         }
        stage('Docker build') { 
             steps {
-                sh 'docker build -t nodedev:v1.0.' 
+                build(nodedev:v1.0) 
             }
         }
         stage('Deploy') { 
