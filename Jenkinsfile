@@ -1,7 +1,6 @@
 pipeline {
     agent any 
-    tools {nodejs "node"
-            docker 'docker'}
+    tools {nodejs "node"}
     stages {
        
           stage('NPM install') { 
@@ -22,7 +21,7 @@ pipeline {
        stage('Docker build') { 
             steps {
                 script {
-                    docker.build('nodedev:v1.0') 
+                    sh 'docker build nodedev:v1.0 .' 
                 }
                 
             }
