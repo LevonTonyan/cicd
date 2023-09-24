@@ -27,8 +27,17 @@ pipeline {
             }
         }
         stage('Deploy') { 
+            when {
+                branch 'dev'
+            }
             steps {
                 sh 'docker run -d --expose 3001 -p 3001:3000 nodedev:v1.0' 
+            }
+              when {
+                branch 'main'
+            }
+            steps {
+                sh 'docker run -d --expose 3000 -p 3000:3000 nodedev:v1.0' 
             }
         }
     }
