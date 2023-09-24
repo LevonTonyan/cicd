@@ -19,6 +19,21 @@ pipeline {
             }
         }
        stage('Docker build') { 
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    sh 'docker build -t nodemain:v1.0 .' 
+                }
+                
+            }
+        }
+
+           stage('Docker build') { 
+                when {
+                branch 'dev'
+            }
             steps {
                 script {
                     sh 'docker build -t nodedev:v1.0 .' 
@@ -26,6 +41,9 @@ pipeline {
                 
             }
         }
+
+
+        
         stage('Deploy') { 
             when {
                 branch 'dev'
@@ -35,5 +53,12 @@ pipeline {
             }
           
         }
+         stage('Deploy') { 
+            when {
+                branch 'main'
+            }
+            steps {
+                sh 'docker run -d --expose 3001 -p 3001:3000 nodemain:v1.0' 
+            }
     }
 }
