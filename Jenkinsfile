@@ -35,6 +35,7 @@ pipeline {
             steps {
                 script {
                       def currentBranch = env.BRANCH_NAME
+                    sh 'docker stop $(docker ps -a -q)'
                      if (currentBranch == 'main') {
                          sh 'docker run -d --expose 3000 -p 3000:3000 nodemain:v1.0' 
                     }else if (currentBranch == 'dev') {
