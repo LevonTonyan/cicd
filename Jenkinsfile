@@ -21,7 +21,10 @@ pipeline {
         }
        stage('Docker build') { 
             steps {
-                docker.build('nodedev:v1.0') 
+                script {
+                    docker.build('nodedev:v1.0') 
+                }
+                
             }
         }
         stage('Deploy') { 
